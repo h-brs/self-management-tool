@@ -21,12 +21,12 @@
       background-color: #f0f0f0;
       border-bottom: 1px solid #ccc;
 
-      & #left {
+      #left {
         display: flex;
         align-items: center;
         padding: 10px;
 
-        & #logo {
+        #logo {
           width: 50px;
           height: 50px;
           background-color: deepskyblue;
@@ -34,30 +34,31 @@
           margin-right: 10px;
         }
 
-        & #title {
+        #title {
           font-size: 1.5em;
           white-space: nowrap;
         }
       }
 
-      & #right {
+      #right {
         display: flex;
         align-items: center;
         padding: 10px;
 
-        & #lang {
+        #lang {
           margin-right: 20px;
 
-          & select {
+          select {
             padding: 5px;
           }
         }
-        & #user {
+
+        #user {
           display: flex;
           align-items: center;
           margin-right: 10px;
 
-          & button {
+          button {
             margin-left: 10px;
           }
         }
@@ -65,7 +66,7 @@
     }
 
     main {
-      & #timetable {
+      #timetable {
         height: 480px;
         display: flex;
         justify-content: center;
@@ -75,11 +76,11 @@
         background-color: lightskyblue;
       }
 
-      & #categories {
+      #categories {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
 
-        & div {
+        div {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -90,11 +91,11 @@
           color: blue;
         }
 
-        & div.draft {
+        div.draft {
           color: black;
         }
 
-        & div:hover {
+        div:hover {
           background-color: #f0f0f0;
         }
       }
@@ -110,45 +111,45 @@
   </style>
 </head>
 <body>
-  <header>
-    <div id="left">
-      <div id="logo"></div>
-      <div id="title">Selbstmanagement-Tool</div>
+<header>
+  <div id="left">
+    <div id="logo"></div>
+    <div id="title">Selbstmanagement-Tool</div>
+  </div>
+  <div id="right">
+    <div id="lang">
+      <select>
+        <option>Deutsch</option>
+        <option>Englisch</option>
+      </select>
     </div>
-    <div id="right">
-      <div id="lang">
-        <select>
-          <option>Deutsch</option>
-          <option>Englisch</option>
-        </select>
-      </div>
-      <div id="user">
-        <div>[Benutzername]</div>
-        <button>Abmelden</button>
-      </div>
+    <div id="user">
+      <div>[Benutzername]</div>
+      <button>Abmelden</button>
     </div>
-  </header>
-  <main>
-    <div id="timetable">[Stundenplan]</div>
-    <div id="categories">
-      <div class="draft">Rückmeldungen</div>
-      <div>Vorlesung mit<br>Live-Feedback</div>
-      <div class="draft">Lernaustausch</div>
-      <div>Chat mit Channels</div>
-      <div class="draft">Zugriff durch Lehrende</div>
-      <div class="draft">Checkliste</div>
-      <div>Motivationssystem</div>
-      <div class="draft">Statistiken</div>
-      <div>Learning Analytics<br>+ Gamification</div>
-      <div class="draft">Lern- und Prüfungsunterstützung</div>
-      <div class="draft">Karteikarten</div>
-      <div class="draft">Gesundheit und Wohlbefinden</div>
-      <div>Online-Trainer<br>& Lerneinheiten</div>
-      <div class="draft">Umgang mit Ablenkungen</div>
-      <div class="draft">Selbstmanagement</div>
-      <div class="draft">Hilfe bei Fragen zum Studium</div>
-    </div>
-  </main>
-  <footer>[Footer]</footer>
+  </div>
+</header>
+<main>
+  <div id="timetable">[Stundenplan]</div>
+  <div id="categories">
+    <div class="draft">Rückmeldungen</div>
+    <div>Vorlesung mit<br>Live-Feedback</div>
+    <div class="draft">Lernaustausch</div>
+    <div>Chat mit Channels</div>
+    <div class="draft">Zugriff durch Lehrende</div>
+    <div class="draft">Checkliste</div>
+    <div>Motivationssystem</div>
+    <div class="draft">Statistiken</div>
+    <div>Learning Analytics<br>+ Gamification</div>
+    <div class="draft">Lern- und Prüfungsunterstützung</div>
+    <div class="draft">Karteikarten</div>
+    <div class="draft">Gesundheit und Wohlbefinden</div>
+    <div>Online-Trainer<br>& Lerneinheiten</div>
+    <div class="draft">Umgang mit Ablenkungen</div>
+    <div class="draft">Selbstmanagement</div>
+    <div class="draft">Hilfe bei Fragen zum Studium</div>
+  </div>
+</main>
+<footer>[Footer]</footer>
 </body>
 </html>
