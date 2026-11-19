@@ -1,0 +1,307 @@
+/*
+ * Quiz presentation inside the component's Shadow DOM; .root is the CCM content element.
+ * Element selectors therefore apply locally. Replacing the Shadow DOM requires adapted selectors.
+ * View classes describe answer states; optional extensions add summary, progress and paging UI.
+ */
+
+/* Theme values shared by all views; dark mode overrides the colors below. */
+.root {
+  --primary: #0ba1e2;
+  --primary-hover: #098dc6;
+  --primary-light: #e7f7fd;
+  --success: #3ba55d;
+  --success-light: #eaf8ec;
+  --error: #d9534f;
+  --error-light: #fdeeee;
+  --border: #d8d8d8;
+  --background: white;
+  --surface: #f8f9fa;
+  --text: #222;
+  --radius: .75rem;
+  --shadow: 0 .2rem .8rem rgb(0 0 0 / .08);
+
+  background-color: var(--surface);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* Include padding and borders in element sizes throughout the component. */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Persistent question/summary area; its inline size is the container for descendant queries. */
+main {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 50rem;
+  margin-inline: auto;
+  padding: 1.5rem;
+}
+
+/* Both views share spacing while the surrounding main element and user header remain connected. */
+.question,
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+a {
+  color: var(--primary);
+}
+
+/* ---------- Dark Mode ---------- */
+
+@media (prefers-color-scheme: dark) {
+  .root {
+    --background: black;
+    --surface: #2a2d33;
+    --border: #454a52;
+    --text: #f1f5f9;
+    --primary: #32b7f0;
+    --primary-light: #163d52;
+    --primary-hover: #58c6f4;
+    --success: #53d769;
+    --success-light: #1d3a23;
+    --error: #ff6b6b;
+    --error-light: #472424;
+  }
+}
+
+/* ---------- Typography ---------- */
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- Answers ---------- */
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--background);
+  transition: .2s;
+}
+
+li:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+/* Highlight the current choice only before evaluation, independently of correctness. */
+.question:not(.evaluated) li:has(.input:checked) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* The question view adds this class only when solution feedback is visible. */
+li.correct {
+  border-color: var(--success);
+  background: var(--success-light);
+}
+
+/* triState represents an undecided answer with the native indeterminate checkbox state. */
+li:has(input[type="checkbox"]:indeterminate) {
+  border-style: dashed;
+}
+
+label {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-top: .2rem;
+  accent-color: var(--primary);
+}
+
+/* ---------- Answer explanations ---------- */
+
+/* The view hides this entire area until feedback is available and an answer has a comment. */
+
+.comment {
+  position: relative;
+}
+
+.comment > label {
+  width: auto;
+}
+
+.comment > label > span {
+  cursor: help;
+  user-select: none;
+}
+
+.comment div {
+  position: absolute;
+  top: calc(100% - 1rem);
+  right: 0;
+  width: 18rem;
+  max-width: min(22rem, 80vw);
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: .5rem;
+  background: var(--background);
+  box-shadow: var(--shadow);
+  display: none;
+  z-index: 100;
+}
+
+/* The hidden checkbox toggles its following panel without a JavaScript event handler. */
+.comment input:checked + span + div {
+  display: block;
+}
+
+/* ---------- Buttons ---------- */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .75rem;
+}
+
+button {
+  padding: .75rem 1.4rem;
+  border: none;
+  border-radius: .5rem;
+  background: var(--primary);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  transition: background .2s, opacity .2s, transform .1s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Individual action restrictions; gui.busy additionally makes the entire content area inert. */
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+/* ---------- Progress ---------- */
+
+/* Wrapper supplied by progressBar; the summary also uses a native progress element. */
+.progress {
+  display: flex;
+}
+
+progress {
+  width: 100%;
+}
+
+/* ---------- Paging ---------- */
+
+.paging {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.page {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: .9rem;
+  font-weight: 600;
+  user-select: none;
+  transition: background .2s, color .2s, transform .15s;
+}
+
+/* paging marks the current question independently of its evaluation or correctness. */
+.page.current {
+  outline: 2px solid var(--primary);
+}
+
+.page.evaluated {
+  background: #cfcfcf;
+}
+
+/* Correctness colors override the neutral evaluated state only when feedback is enabled. */
+.page.correct {
+  background: var(--success);
+  color: white;
+}
+
+.page.wrong {
+  background: var(--error);
+  color: white;
+}
+
+/* skippable and prevButton mark the page numbers for which they attach navigation handlers. */
+.page.clickable {
+  cursor: pointer;
+}
+
+.page.clickable:hover {
+  transform: scale(1.08);
+}
+
+/* ---------- Focus ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Container Query ---------- */
+
+/* Queries use an ancestor container, not the viewport. Descendants use main as their container;
+   the main rule itself only applies when a further ancestor provides a matching container. */
+@container (min-width: 40rem) {
+  main {
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+  }
+
+  button {
+    min-width: 8rem;
+  }
+}
+
+/* Optional header from main(): positions the embedded user component outside the changing quiz content. */
+.user-area {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 0;
+}

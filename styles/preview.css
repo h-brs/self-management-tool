@@ -1,0 +1,7 @@
+@import url('../libs/app_collection/resources/styles-hbrs.css');
+.app-collection { min-height: 0; border-radius: 4px; }
+.ac-header { display: none; }
+.ac-heading { font-size: 1.45rem; margin-top: 0; }
+.ac-description { font-size: 1.1rem; }
+.ac-section { margin: 0; }
+.ac-grid { display: block; }

@@ -1,0 +1,4 @@
+@import url('../libs/teambuild/resources/default.css');
+@import url('./study-tools.css');
+.team { background: white; padding: 12px; border: 1px solid #d3e2ea; border-radius: 5px; }
+.team button { color: #005779; border: 1px solid #abc9d7; padding: 6px 12px; background: #edf6fa; }

@@ -1,0 +1,463 @@
+#element {
+    /* colors */
+    --primary-color: #2c3e50;
+    --primary-font: #fff;
+    --secondary-color: #efefef;
+    --secondary-font: #000;
+    --border: #ccc;
+    --card-bg: #ffffff;
+    --course-item-bg: #b9cce2;
+    --deck-item-bg: #f1f1e6;
+
+    /* fonts */
+    font-family: Montserrat, sans-serif;
+    font-weight: 100;
+    font-size: 17px;
+    background-color: #f0f2f5;
+}
+
+/*region general */
+.hidden {
+    display: none;
+}
+
+.unseen {
+    visibility: hidden !important;
+}
+
+button {
+    padding: 10px 13px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: var(--primary-font);
+    font-size: 15px;
+
+    &.btn-low-style {
+        background: none;
+        border: none;
+        color: var(--primary-color);
+    }
+}
+
+.cancel {
+    background-color: var(--secondary-color);
+    color: var(--secondary-font);
+}
+
+input, select, textarea {
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.modal-dialog {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    & h3 {
+        margin-top: 0;
+    }
+
+    .modal-button-container {
+        display: flex;
+        gap: 5px;
+        margin-top: 15px;
+    }
+}
+/*endregion */
+
+/*region main template */
+#main {
+    #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: var(--primary-color);
+        margin-bottom: 15px;
+        color: var(--primary-font);
+        border-radius: 10px;
+    }
+
+    #headline {
+        margin: 10px 0;
+    }
+
+    #content {
+        margin: 10px;
+    }
+}
+/*endregion */
+
+/*region settings-dialog template */
+#settings-dialog {
+    & select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    & p {
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+}
+/*endregion */
+
+/*region list-view template */
+#list-view {
+    #list-button-container {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        align-items: center;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        background-color: white;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        width: 150px;
+        z-index: 1000;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 8px 12px;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    #add-deck-course-options, #sort-courses-options {
+        top: 47px;
+    }
+
+    #right-button {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #settings-button {
+        font-size: 33px;
+    }
+
+    #sort-courses-button {
+        position: relative;
+        font-size: 16px;
+    }
+
+    #sort-courses-options {
+        right: 0 !important;
+    }
+
+    #course-option-button, #deck-option-button {
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    #sort-deck-options {
+        left: 150px;
+        top: 0;
+    }
+
+    .list-item-buttons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .list-item {
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        margin: 15px 0;
+        background-color: #ffffff;
+        padding: 15px 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .list-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .list-item-content {
+        width: 60%;
+    }
+
+    #toggle-course-button {
+        font-size: 1.5em;
+    }
+
+    .list-item-description {
+        padding: 10px 0;
+        color: #636363;
+    }
+
+    .list-item-deadline {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+
+        & a {
+            color: #009bff;
+            border-radius: 5px;
+            padding: 5px;
+            min-width: 143px;
+            text-align: center;
+            background-color: #ecf7fe;
+        }
+
+        & a.expired {
+            color: red;
+            background-color: #ff00001c;
+        }
+    }
+
+    #card-decks {
+        .list-item {
+            background-color: #f9f9f9;
+        }
+    }
+
+    .list-item-title {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .list-item-stats {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #empty-course-list {
+        padding-left: 20px;
+        margin-top: 10px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+}
+/*endregion */
+
+/*region import-deck-dialog template */
+#import-deck-course-select {
+    margin: 10px 0;
+}
+/*endregion */
+
+/*region editor template */
+.editor {
+    .btn-link-style {
+        background: none;
+        border: none;
+        text-decoration: underline;
+        cursor: pointer;
+        color: var(--primary-color);
+        padding-left: 0;
+    }
+
+    #cards-container {
+        border: solid 1px black;
+        padding: 5px;
+    }
+
+    #cards {
+        margin-bottom: 5px;
+    }
+
+    #card {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 40% !important;
+
+        & textarea {
+            width: 90% !important;
+        }
+
+        & label {
+            font-weight: bold;
+        }
+    }
+
+    #delete-card-button {
+        align-self: flex-end;
+    }
+
+    #course-deadline-input {
+        margin-bottom: 5px;
+    }
+
+    #add-course-container {
+        border: solid 1px black;
+        padding: 5px;
+    }
+
+    & input[type="text"], & select, & textarea {
+        width: 30%;
+    }
+    #question-input, #answer-input {
+        background-color: white;
+    }
+
+    #submit-deck {
+        margin-right: 5px;
+    }
+
+    #submit-course {
+        margin-right: 5px;
+    }
+
+    .submit-hint {
+        font-size: 14px;
+        color: #555;
+    }
+}
+/*endregion */
+
+/*region learning-view template */
+#learning-view {
+    #card-content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    #card-container {
+        width: 80%;
+        max-width: 100%;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #card-content {
+        width: 100%;
+        height: 50vh;
+        min-height: 300px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    }
+
+    .card-face {
+        position: absolute;
+        width: 95%;
+        height: 100%;
+        backface-visibility: hidden;
+        background-color: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow-y: auto;
+    }
+
+    #question-text, #answer-text {
+        width: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 10px;
+        & img {
+            height: 250px !important;
+        }
+    }
+
+    .card-face.back {
+        transform: rotateY(180deg);
+    }
+
+    #number-of-cards {
+        z-index: 1001;
+    }
+
+    #card-buttons {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    #card-buttons button {
+        background: none;
+        border: none;
+        padding: 10px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    #difficulty-buttons {
+        display: flex;
+        justify-content: center;
+
+        & button {
+            margin-top: 5px;
+            color: black;
+        }
+    }
+
+    #hard {
+        background-color: #fef3f2;
+        border: 1px solid #f04438;
+    }
+
+    #medium {
+        background-color: #fefbe8;
+        border: 1px solid #eaaa08;
+        margin: 5px 10px 0 10px;
+    }
+
+    #easy {
+        background-color: #ecfdf3;
+        border: 1px solid #17b26a;
+    }
+
+    .selected-difficulty {
+        border-width: 4px !important;
+    }
+}
+/*endregion */
+
+/* region learning-mode-dialog template */
+#card-order {
+    margin: 10px 0;
+    width: 200px;
+}
+
+#card-selection {
+    margin: 10px 0;
+    width: 200px;
+}
+/* endregion */

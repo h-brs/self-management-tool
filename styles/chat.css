@@ -1,0 +1,4 @@
+@import url('../libs/chat/resources/snack.css');
+@import url('./study-tools.css');
+#messages:empty::before { content: 'Schreibe die erste Nachricht in diesem lokalen Kurschat.'; }
+#send { background: #006b94; color: white; border: 0; padding: 10px 18px; }

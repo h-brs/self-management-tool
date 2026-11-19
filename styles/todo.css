@@ -1,0 +1,5 @@
+@import url('../libs/todo/resources/styles.css');
+.todo-content, .todo-dialog, .toast, .celebration-layer { --ink:#16394c; --muted:#526c7a; --green:#006b94; --mint:#e7f4fa; --line:#d3e2ea; --paper:#fff; }
+.todo-app { min-height: 0; background: #f3f8fb; }
+.nav-button.active, .filter.selected { background: var(--mint); }
+h1 span { color: #0076a4; }

@@ -1,0 +1,304 @@
+<ccm-template key="main">
+    <div id="main" onclick="%onClickOutside%">
+        <div id="header">
+            <div>
+                <h1 id="headline">%headline%</h1>
+                <b id="sub-headline">%subHeadline%</b>
+            </div>
+            <div id="user"></div>
+        </div>
+        <button type="button" id="back-button" class="hidden" onclick="%onBackButton%">%backButton%</button>
+        <div id="content"></div>
+    </div>
+</ccm-template>
+
+
+<ccm-template key="list_view">
+    <div id="list-view">
+        <div id="list-button-container">
+            <button type="button" id="add-deck-course-button" onclick="%onAddDeckOrCourse%">%addDeckOrCourse%</button>
+            <div id="add-deck-course-options" class="dropdown-menu hidden">
+                <a id="create-deck" onclick="%onCreateDeck%">%createDeck%</a>
+                <a id="import-deck" onclick="%onImportDeck%">%importDeck%</a>
+                <a id="create-course" onclick="%onCreateCourse%">%createCourse%</a>
+                <a id="import-course" onclick="%onImportCourse%">%importCourse%</a>
+            </div>
+            <div id="right-button">
+                <button type="button" id="sort-courses-button" class="btn-low-style" onclick="%onSortCourses%">
+                    %sortCourses%
+                </button>
+                <div id="sort-courses-options" class="dropdown-menu hidden">
+                    <a id="sort-courses-title" onclick="%onSortCoursesTitle%">%sortCoursesTitle%</a>
+                    <a id="sort-courses-deadline" onclick="%onSortCoursesDeadline%">%sortCoursesDeadline%</a>
+                    <a id="sort-courses-cardCount" onclick="%onSortCoursesCardCount%">%sortCoursesCardCount%</a>
+                    <a id="sort-courses-status" onclick="%onSortCoursesStatus%">%sortCoursesStatus%</a>
+                </div>
+                <button type="button" id="settings-button" class="btn-low-style" onclick="%onOpenSettings%">%settingsIcon%</button>
+            </div>
+        </div>
+
+        <div id="list-of-courses"></div>
+    </div>
+</ccm-template>
+
+<ccm-template key="empty_course_list">
+    <div id="empty-course-list">
+        <p>%noCoursesMessage%</p>
+        <p>%noCoursesClickToAdd%</p>
+        <ul>
+            <li>%noCoursesCreateNewDeck%</li>
+            <li>%noCoursesImportExistingDeck%</li>
+            <li>%noCoursesCreateNewCourse%</li>
+            <li>%noCoursesImportExistingCourse%</li>
+        </ul>
+    </div>
+</ccm-template>
+
+<ccm-template key="course_list_item">
+    <div class="list-item">
+        <div class="list-item-header">
+            <div class="list-item-content">
+                <div class="list-item-title">%courseTitle%</div>
+                <div class="list-item-description">%courseDescription%</div>
+                <div class="list-item-buttons">
+                    <button type="button" id="toggle-course-button" class="btn-low-style" onclick="%onToggleCourse%">&#9660;</button>
+                    <button type="button" onclick="%onStartCourse%">%startCourse%</button>
+                    <div>
+                        <button type="button" id="course-option-button" class="btn-low-style" onclick="%onCourseOptions%">...</button>
+                        <div id="course-options" class="dropdown-menu hidden">
+                            <a onclick="%onSortDecks%">%sortDecks%</a>
+                            <div id="sort-deck-options" class="dropdown-menu hidden">
+                                <a onclick="%onSortDeckTitle%">%sortDeckTitle%</a>
+                                <a onclick="%onSortDeckDeadline%">%sortDeckDeadline%</a>
+                                <a onclick="%onSortDeckCardCount%">%sortDeckCardCount%</a>
+                                <a onclick="%onSortDeckStatus%">%sortDeckStatus%</a>
+                            </div>
+                            <a onclick="%onEditCourse%">%editCourse%</a>
+                            <a onclick="%onExportCourse%">%exportCourse%</a>
+                            <a onclick="%onDeleteCourse%">%deleteCourse%</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-item-deadline">%courseDeadline%</div>
+            <div class="list-item-stats">
+                <div style="%courseStatusChartStyle%"></div>
+                <div>%courseStatus%</div>
+            </div>
+        </div>
+        <div id="card-decks" class="hidden"></div>
+    </div>
+</ccm-template>
+
+<ccm-template key="deck_list_item">
+    <div class="list-item">
+        <div class="list-item-header">
+            <div class="list-item-content">
+                <div class="list-item-title">%deckTitle%</div>
+                <div class="list-item-description">%deckDescription%</div>
+                <div class="list-item-buttons">
+                    <button type="button" data-deck-id="%deckId%" onclick="%onStartDeck%">%startDeck%</button>
+                    <div>
+                        <button type="button" id="deck-option-button" class="btn-low-style" onclick="%onDeckOptions%">...</button>
+                        <div id="deck-options" class="dropdown-menu hidden">
+                            <a onclick="%onEditDeck%">%editDeck%</a>
+                            <a onclick="%onExportDeck%">%exportDeck%</a>
+                            <a onclick="%onDeleteDeck%">%deleteDeck%</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-item-deadline">%deckDeadline%</div>
+            <div class="list-item-stats">
+                <div id="card-stats-chart" style="%deckStatusChartStyle%"></div>
+                <div id="card-stats-text">%deckStatus%</div>
+            </div>
+        </div>
+    </div>
+</ccm-template>
+
+<ccm-template key="import_deck_dialog">
+    <dialog class="modal-dialog" id="import-deck-dialog">
+        <h3>%importDeck%</h3>
+        <label for="import-deck-course-select">%associatedCourse%</label><br>
+        <select id="import-deck-course-select">
+            %courseSelectOptions%
+        </select>
+        <div class="modal-button-container">
+            <button type="button" onclick="%onChooseDeckFileToImport%">%chooseDeckFileToImport%</button>
+            <button type="button" onclick="%onCancelImportDeck%" class="cancel">%cancelImportDeck%</button>
+        </div>
+    </dialog>
+</ccm-template>
+
+<ccm-template key="settings_dialog">
+    <dialog id="settings-dialog" class="modal-dialog">
+        <h3>%settingsHeadline%</h3>
+        <div>
+            <p>%languageSelect%</p>
+            <select id="language-select">%languageOptions%</select>
+        </div>
+        <div>
+            <p>%learningModeSettings%-%learningModeStandards%</p>
+            <div>
+                <label for="default-card-order">%cardsOrder%</label>
+                <select id="default-card-order">
+                    <option value="original">%cardsOrderOriginal%</option>
+                    <option value="random">%cardsOrderRandom%</option>
+                    <option value="status">%cardsOrderDifficulty%</option>
+                </select>
+            </div>
+            <div>
+                <label for="default-card-selection">%selectCards%</label>
+                <select id="default-card-selection">
+                    <option value="all">%selectCardsAll%</option>
+                    <option value="hard">%selectCardsHard%</option>
+                    <option value="medium-hard">%selectCardsMediumHard%</option>
+                </select>
+            </div>
+            <div>
+                <input type="checkbox" id="skip-learning-dialog">
+                <label for="skip-learning-dialog">%skipLearningDialog%</label>
+            </div>
+        </div>
+        <div>
+            <p>%statusSettings%</p>
+            <input type="radio" id="percent" name="status" value="percent">
+            <label for="percent">%percent%</label>
+            <input type="radio" id="count" name="status" value="count">
+            <label for="count">%count%</label>
+        </div>
+        <div class="modal-button-container">
+            <button type="button" onclick="%onSubmitSettings%">%submitSettings%</button>
+            <button type="button" onclick="%onCancelSettings%" class="cancel">%cancelSettings%</button>
+        </div>
+    </dialog>
+</ccm-template>
+
+
+<ccm-template key="editor_course_view">
+    <form id="add-course-form" class="editor"><br>
+        <label for="course-title">%courseTitleInput%</label><br>
+        <input type="text" id="course-title" name="title" size="40" required/><br><br>
+
+        <label for="course-description">%courseDescriptionInput%</label><br>
+        <textarea id="course-description" name="description" cols="34" rows="4"></textarea><br><br>
+
+        <input type="checkbox" id="course-deadline" name="deadline" onchange="%onToggleDeadline%">
+        <label for="course-deadline">%courseDeadlineInput%</label><br>
+        <input id="course-deadline-input" name="deadlineInput" type="date" class="hidden"/><br><br>
+
+        <button type="button" id="submit-course" onclick="%onSubmitCourse%">%submitCourse%</button>
+        <button type="button" class="cancel" onclick="%onCancelSubmitCourse%">%cancelCourse%</button>
+        <p class="submit-hint">%submitCourseHint%</p>
+    </form>
+</ccm-template>
+
+<ccm-template key="editor_deck_view">
+    <form id="add-deck-form" class="editor"><br>
+        <label for="select-course">%courseInput%</label><br>
+        <select id="select-course" name="course" required>
+            <option disabled selected value>%selectCoursePlaceholder%</option>
+            %courseOptions%
+        </select><br>
+        <button type="button" class="btn-link-style" onclick="%onAddCourse%">%addCourse%</button>
+        <br>
+        <div id="add-course-container" class="hidden"></div>
+        <br>
+
+        <label for="deck-title">%deckTitleInput%</label><br>
+        <input type="text" id="deck-title" name="title" size="40" required/><br><br>
+
+        <label for="deck-description">%deckDescriptionInput%</label><br>
+        <textarea id="deck-description" name="description" rows="4"></textarea><br><br>
+
+        <input type="checkbox" id="deck-deadline" name="deadline" onchange="%onToggleDeadline%">
+        <label for="deck-deadline">%deckDeadlineInput%</label><br>
+        <input type="date" id="deck-deadline-input" name="deadlineInput" class="hidden"/><br><br>
+
+        <div id="cards-container">
+            <h3>%cardsHeadline%</h3>
+            <div id="cards"></div>
+            <button type="button" id="add-card" onclick="%onAddCard%">%addCard%</button>
+            <br>
+        </div>
+        <br>
+        <button type="button" id="submit-deck" onclick="%onSubmitDeck%">%submitDeck%</button>
+        <button type="button" class="cancel" onclick="%onCancelSubmitDeck%">%cancelDeck%</button>
+        <p class="submit-hint">%submitDeckHint%</p>
+    </form>
+</ccm-template>
+
+<ccm-template key="add_card">
+    <div id="card" data-card-id="%cardId%">
+        <div class="input-group">
+            <label for="question-input">%question%</label>
+            <div id="question-input"></div>
+        </div>
+        <div class="input-group">
+            <label for="answer-input">%answer%</label>
+            <div id="answer-input"></div>
+        </div>
+        <button type="button" id="delete-card-button" onclick="%onDeleteCard%">%deleteCard%</button>
+    </div>
+</ccm-template>
+
+
+<ccm-template key="learning_mode_dialog">
+    <dialog id="learning-mode-dialog" class="modal-dialog">
+        <h3>%learningMode%</h3>
+        <div>
+            <label for="card-order">%cardsOrder%</label><br>
+            <select id="card-order">
+                <option value="original">%cardsOrderOriginal%</option>
+                <option value="random">%cardsOrderRandom%</option>
+                <option value="status">%cardsOrderDifficulty%</option>
+            </select>
+        </div>
+        <div>
+            <label for="card-selection">%selectCards%</label><br>
+            <select id="card-selection">
+                <option value="all">%selectCardsAll%</option>
+                <option value="hard">%selectCardsHard%</option>
+                <option value="medium-hard">%selectCardsMediumHard%</option>
+            </select>
+        </div>
+        <div class="modal-button-container">
+            <button type="button" onclick="%onStartLearning%">%startLearning%</button>
+            <button type="button" onclick="%onCancelLearning%" class="cancel">%cancelLearning%</button>
+        </div>
+    </dialog>
+</ccm-template>
+
+<ccm-template key="learning_view">
+    <a id="learning-view">
+        <p id="description">%description%</p>
+        <div id="card-content-container"></div>
+        <div id="difficulty-buttons" class="unseen">
+            <button type="button" id="hard">%difficulty_hard%</button>
+            <button type="button" id="medium">%difficulty_medium%</button>
+            <button type="button" id="easy">%difficulty_easy%</button>
+        </div>
+    </a>
+</ccm-template>
+
+<ccm-template key="learning_view_card">
+    <div id="card-container">
+        <div id="card-content">
+            <div class="card-face front">
+                <p id="question-text">%question%</p>
+            </div>
+            <div class="card-face back">
+                <p id="answer-text">%answer%</p>
+            </div>
+        </div>
+        <div id="number-of-cards">
+            <span>%currentCardNumber%</span> / <span>%maxNumberOfCards%</span>
+        </div>
+        <div id="card-buttons">
+            <button type="button" class="btn-low-style %hidePrevBtn%" id="previous-card-button" onclick="%onPreviousCard%">&#8592;</button>
+            <button type="button" class="btn-low-style" id="turn-around-button" onclick="%onTurnAround%">&#8634;</button>
+            <button type="button" class="btn-low-style %hideNextBtn%" id="next-card-button" onclick="%onNextCard%">&#8594;</button>
+        </div>
+    </div>
+</ccm-template>

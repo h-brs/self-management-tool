@@ -1,0 +1,3 @@
+:host, #element, .main { font-family: "Segoe UI", Arial, sans-serif; color: #16394c; --primary-color:#006f99; --accent-color:#006f99; }
+#element { box-sizing: border-box; max-width: 100%; overflow-x: auto; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #0076a4; outline-offset: 2px; }

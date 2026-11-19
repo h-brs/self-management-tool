@@ -1,0 +1,4 @@
+@import url('../libs/live_poll/resources/styles.css');
+@import url('./study-tools.css');
+.button { background: #006b94; border-radius: 4px; padding: 10px 18px; }
+#question #text { font-weight: 600; }

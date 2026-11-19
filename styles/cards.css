@@ -1,0 +1,3 @@
+@import url('../libs/flash_cards/styles.css');
+@import url('./study-tools.css');
+#element { font-weight: 400; --course-item-bg: #ddecf3; --deck-item-bg: #f3f8fb; }

@@ -1,0 +1,8 @@
+@import url('../libs/quiz/resources/styles.css');
+.root { --primary: #006f9b; --primary-hover: #005779; }
+
+/* The bundled quiz view includes literal quotes in the feedback class. */
+li[class~='"correct"'] {
+  border-color: var(--success);
+  background: var(--success-light);
+}
