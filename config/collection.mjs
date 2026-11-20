@@ -1,5 +1,5 @@
 const framework = './libs/ccm/ccm-29.0.0.min.js';
-const collection = './libs/app_collection/ccm.app_collection.mjs';
+const collection = './libs/app_collection/ccm.app_collection-1.1.0.min.mjs';
 // App Collection resolves the tool and its configuration when the tile first opens.
 function tool(name, extension = 'js') {
   return ['ccm.start', `./libs/${name}/ccm.${name}.${extension}`, ['ccm.load', './config/apps.mjs#' + name]];

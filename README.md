@@ -39,7 +39,7 @@ Der lokale Gast verwendet dasselbe Browserprofil für alle Sitzungen auf derselb
 
 | Bestandteil | Verwendeter Stand |
 | --- | --- |
-| App Collection | [ccmjs/app_collection · 329a407](https://github.com/ccmjs/app_collection/tree/329a407094312083c5f42b1a0904af30ccdc4dd8) |
+| App Collection | [ccmjs/app_collection v1.1.0 (jsDelivr)](https://cdn.jsdelivr.net/gh/ccmjs/app_collection@v1.1.0/ccm.app_collection-1.1.0.min.mjs) |
 | To-do | [ccmjs/todo · 55de2c5](https://github.com/ccmjs/todo/tree/55de2c5da6d66bc28989fe712d86f47c0930e83c) |
 | Quiz und ccm-ui | [ccmjs/quiz · 801a9a2](https://github.com/ccmjs/quiz/tree/801a9a226dd80ddbff6b9959cb4221ba6a7f855d) |
 | CCM 29.0.0 | [ccmjs/framework · b5fe4a5](https://github.com/ccmjs/framework/blob/b5fe4a5ceb8cda35783deb8312a3d25f9c8465a9/ccm.js) |
