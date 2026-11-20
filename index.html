@@ -4,17 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,">
-  <!-- Keep versioned runtimes in the CCM namespace. -->
-  <script>window.ccm ??= { files: {}, callbacks: {} };</script>
-  <script src="./libs/ccm/ccm-28.1.0.min.js"></script>
   <title>Mein Schreibtisch · Selbstmanagement im Studium</title>
-</head>
-<body>
+  <script src="./libs/ccm/ccm-29.0.0.min.js"></script>
   <script type="module">
-    const ccm = window.ccm['28.1.0'];
     await ccm.start('./libs/app_collection/ccm.app_collection.mjs', {
-      ccm, config: ['ccm.load', './config/collection.mjs#desk'],
+      ccm,
+      config: ['ccm.load', './config/collection.mjs#desk'],
     }, document.body);
   </script>
-</body>
+</head>
+<body></body>
 </html>

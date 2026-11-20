@@ -1,5 +1,5 @@
 // All paths resolve against the hosting HTML page, also on a project subpath.
-const framework = './libs/ccm/ccm-28.1.0.min.js';
+const framework = './libs/ccm/ccm-29.0.0.min.js';
 const legacy = './libs/ccm/ccm-27.5.0.min.js';
 const libs = './libs/';
 const load = url => ['ccm.load', url];
@@ -20,13 +20,11 @@ const guest = ['ccm.instance', './libs/user/ccm.user.js', {
   css: [], helper: helper('7.4.0'),
 }];
 
-function classic(name, options) {
-  // Recognize the first request from CCM 28’s module loader in self-registering scripts.
-  window.ccm.files['ccm.' + name + '.js'] ??= null;
+function classic(options) {
   return { ccm: legacy, shadow: 'open', user: guest, beforeCreation: syncLegacyDatabaseVersion, ...options };
 }
 
-export const timetable = classic('timetable', {
+export const timetable = classic({
   async beforeCreation(config) {
     await syncLegacyDatabaseVersion();
     // CCM 27 resolves sibling dependencies in parallel. Resolve the first of
@@ -42,30 +40,30 @@ export const timetable = classic('timetable', {
     } },
   } }], studentCourseStore: localStore('courses'), studentStore: localStore('schedule'),
 });
-export const checklist = classic('checklist', {
+export const checklist = classic({
   css: load('./styles/checklist.css'), helper: helper('7.2.0'), store: localStore('checklists'),
 });
 const cards = './libs/flash_cards/';
-export const flash_cards = classic('flash_cards', {
+export const flash_cards = classic({
   css: load('./styles/cards.css'), editor: null, helper: helper('7.2.0'), html: load(cards + 'templates.html'),
   languages: { de: cards + 'resources.js#de', en: cards + 'resources.js#en' },
   text: ['ccm.load', { url: cards + 'resources.js#de', type: 'module' }],
   store: localStore('cards'), onchange: null,
 });
 
-export const teambuild = classic('teambuild', {
+export const teambuild = classic({
   css: load('./styles/teams.css'), helper: helper('7.4.0'), html: load(libs + 'teambuild/resources/templates.html'),
   data: { store: localStore('teams'), key: 'lerngruppen' }, max_members: 5,
   names: ['Montagsrunde', 'Prüfungsvorbereitung'], text: { team: 'Lerngruppe', join: 'Beitreten', leave: 'Verlassen', free: 'Platz frei' },
 });
-export const chat = classic('chat', {
+export const chat = classic({
   css: load('./styles/chat.css'), helper: helper('7.4.0'), html: load(libs + 'chat/resources/templates_v3.html'),
   data: { store: localStore('chat'), key: 'lernaustausch', permissions: null },
   moment: load(libs + 'moment/moment.min.js'), editor: null, hide_login: true,
   button: 'Senden', picture: libs + 'user/resources/icon.svg', time_format: 'DD.MM.YYYY, HH:mm',
 });
-export const live_poll = classic('live_poll', {
-  css: load('./styles/poll.css'), helper: helper('4.2.1'), html: load(libs + 'live_poll/resources/templates.html'),
+export const live_poll = classic({
+  css: load('./styles/poll.css'), helper: helper('7.4.0'), html: load(libs + 'live_poll/resources/templates.html'),
   converter: null, chart: null, data: { store: localStore('poll'), key: 'tempo' },
   question: 'Wie kommst du mit dem Tempo der Veranstaltung zurecht?',
   answers: ['Ich wünsche mir mehr Zeit.', 'Das Tempo passt für mich.', 'Ich bin bereit für den nächsten Schritt.'],
